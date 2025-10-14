@@ -181,12 +181,12 @@ public class EsirUtil {
             SAME = (float) (1 + Math.sqrt(actualUseStarLevel)) * CONSTANT_COEFFICIENT;
             BROKEN = (float) (Math.sqrt(actualUseStarLevel)/10f) * DAMAGED_COEFFICIENT;
             DECREASE = (float)(1 + Math.sqrt(2 * actualUseStarLevel)) * FAILURE_COEFFICIENT;
-            INCREASE = (float) (newAmplifierLevel >= 20 ? SUCCESS_COEFFICIENT * (10f / Math.sqrt(actualUseStarLevel / 2f + 1)) : SUCCESS_COEFFICIENT * ((10f / Math.sqrt(actualUseStarLevel / 2f + 1)) * Math.pow(MINIMUM_GUARANTEE_RATE * nonChieftain + 1, 3)));
+            INCREASE = (float) (newAmplifierLevel >= 20 ? SUCCESS_COEFFICIENT * (10f / Math.sqrt(actualUseStarLevel / 2f + 1)) : SUCCESS_COEFFICIENT * ((10f / Math.sqrt(actualUseStarLevel / 2f + 1)) * Math.pow(MINIMUM_GUARANTEE_RATE * nonChieftain, 3)));
         }else {
             SAME = 5;
             BROKEN = 0;
             DECREASE = 5;
-            INCREASE = (float)((15 - newAmplifierLevel) * Math.pow(MINIMUM_GUARANTEE_RATE * nonChieftain + 1, 3));
+            INCREASE = (float)((15 - newAmplifierLevel) * Math.pow(MINIMUM_GUARANTEE_RATE * nonChieftain * 3, 3));
         }
         int randomNum = new Random(System.currentTimeMillis()).nextInt((int) (10 * (BROKEN + SAME + DECREASE + INCREASE))) + 1;
         modifyStarPicking(loreList,nonChieftain,newAmplifierLevel);
