@@ -45,18 +45,18 @@ public abstract class BaseStarUpgradeTicket extends Item {
                     pl.sendMessage(new TextComponent("该装备处于损毁状态，无法升星").setStyle(Style.EMPTY.withColor(ChatFormatting.RED)), Util.NIL_UUID);
                     return InteractionResultHolder.fail(ticket);
                 }
-                if ((int) attribute[1] < 10) {
-                    pl.sendMessage(new TextComponent("该装备未增幅至10级，无法升星").setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)), Util.NIL_UUID);
+                if ((int) attribute[1] < 20) {
+                    pl.sendMessage(new TextComponent("该装备未增幅至20级，无法升星").setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)), Util.NIL_UUID);
                     return InteractionResultHolder.fail(ticket);
                 }
                 if (!EsirUtil.canUpgrade((int) attribute[2], ticket)) {
                     pl.sendMessage(new TextComponent("该装备目前的星级为" + (int) attribute[2] + "星，无法使用手上的升星券升星").setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)), Util.NIL_UUID);
                     return InteractionResultHolder.fail(ticket);
                 }
-                pl.setItemSlot(EquipmentSlot.OFFHAND, EsirUtil.upgradeEquip(pl, offhand, (int) attribute[1] - 10, (int) attribute[2] + 1,0));
+                pl.setItemSlot(EquipmentSlot.OFFHAND, EsirUtil.upgradeEquip(pl, offhand, (int) attribute[1] - 20, (int) attribute[2] + 1,0));
                 ticket.shrink(1);
                 pl.inventoryMenu.broadcastChanges();
-                pl.sendMessage(new TextComponent("升星完成，该装备目前的星级为" + ((int) attribute[2] + 1) + "，增幅等级为" + ((int) attribute[1] - 10)).setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN)), Util.NIL_UUID);
+                pl.sendMessage(new TextComponent("升星完成，该装备目前的星级为" + ((int) attribute[2] + 1) + "，增幅等级为" + ((int) attribute[1] - 20)).setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN)), Util.NIL_UUID);
             }
             return InteractionResultHolder.success(ticket);
         } else

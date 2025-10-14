@@ -45,6 +45,10 @@ public abstract class BaseAmplifierStone extends Item {
                     pl.sendMessage(new TextComponent("该装备处于损毁状态，无法进行增幅").setStyle(Style.EMPTY.withColor(ChatFormatting.RED)), Util.NIL_UUID);
                     return InteractionResultHolder.fail(amplifierStone);
                 }
+                if(!EsirUtil.canStrengthen((int) attribute[2], amplifierStone)){
+                    pl.sendMessage(new TextComponent("强化石星级不足，无法进行增幅").setStyle(Style.EMPTY.withColor(ChatFormatting.RED)), Util.NIL_UUID);
+                    return InteractionResultHolder.fail(amplifierStone);
+                }
                 ItemStack newEquip = EsirUtil.amplifyEquip(pl, offhand, attribute);
                 if (!newEquip.isEmpty())
                     pl.setItemSlot(EquipmentSlot.OFFHAND, newEquip);

@@ -39,7 +39,7 @@ public abstract class BaseStaff<T> extends net.tslat.aoa3.content.item.weapon.st
                 starLevel = (int) attribute[2];
             }
         }
-        float extraDmgMod = (1 + extraDmg) * (1 + (0.04f * (amplifierLevel + (12.5F * starLevel))));
+        float extraDmgMod = (1 + extraDmg) * (1 + (0.02f * (amplifierLevel + (25F * starLevel))));
 
         CompoundTag nbt;
         for (BaseEnergyShot shot : shots) {

@@ -53,7 +53,7 @@ public abstract class BaseGun extends net.tslat.aoa3.content.item.weapon.gun.Bas
                 starLevel = (int) attribute[2];
             }
         }
-        nbt.putFloat("extraDmgMod", (1 + extraDmg) * (1 + (0.04f * (amplifierLevel + (12.5F * starLevel)))));
+        nbt.putFloat("extraDmgMod", (1 + extraDmg) * (1 + (0.02f * (amplifierLevel + (25F * starLevel)))));
         nbt.putInt("shellLevel", shellLevel);
 
         shooter.level.addFreshEntity(bullet);
