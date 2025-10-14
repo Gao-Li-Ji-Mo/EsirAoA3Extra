@@ -188,12 +188,9 @@ public class EsirUtil {
             DECREASE = 5;
             INCREASE = (float)((15 - newAmplifierLevel) * Math.pow(MINIMUM_GUARANTEE_RATE * nonChieftain + 1, 3));
         }
-        player.sendMessage(new TextComponent("内测版本禁止外传,不变概率:" + SAME + "," + "损毁概率:" + BROKEN + "," + "失败概率:" + DECREASE + "," + "增幅成功概率:" + INCREASE ).setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN)), Util.NIL_UUID);
-
-
         int randomNum = new Random(System.currentTimeMillis()).nextInt((int) (10 * (BROKEN + SAME + DECREASE + INCREASE))) + 1;
+        modifyStarPicking(loreList,nonChieftain,newAmplifierLevel);
         if (randomNum <= 10 * BROKEN) {
-            modifyStarPicking(loreList,nonChieftain,newAmplifierLevel);
             player.sendMessage(new TextComponent("增幅失败，该装备将变为损毁状态，增幅等级将清零").setStyle(Style.EMPTY.withColor(ChatFormatting.RED)), Util.NIL_UUID);
             if (stack.getTag().contains("amplifierProtection")) {
                 player.sendMessage(new TextComponent("神恩符为你免除了此次的损毁惩罚，保护效果已消失").setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN)), Util.NIL_UUID);
@@ -211,11 +208,9 @@ public class EsirUtil {
                 }
             }
         } else if (randomNum <= 10 * (BROKEN + SAME)) {
-            modifyStarPicking(loreList,nonChieftain,newAmplifierLevel);
             player.sendMessage(new TextComponent("增幅失败，该装备增幅等级未发生变化").setStyle(Style.EMPTY.withColor(ChatFormatting.RED)), Util.NIL_UUID);
             return ItemStack.EMPTY;
         } else if (randomNum <= 10 * (BROKEN + SAME + DECREASE)) {
-            modifyStarPicking(loreList,nonChieftain,newAmplifierLevel);
             player.sendMessage(new TextComponent("增幅失败，该装备增幅等级将-1").setStyle(Style.EMPTY.withColor(ChatFormatting.RED)), Util.NIL_UUID);
             if (--newAmplifierLevel == -1) {
                 player.sendMessage(new TextComponent("发现该装备增幅等级为0，将保持不变").setStyle(Style.EMPTY.withColor(ChatFormatting.GOLD)), Util.NIL_UUID);
@@ -228,7 +223,6 @@ public class EsirUtil {
             }
             modifyAmplifierLevel(loreList, newAmplifierLevel);
         } else {
-            modifyStarPicking(loreList,nonChieftain,newAmplifierLevel);
             int bonus = new Random(System.currentTimeMillis()).nextInt(100) + 1;
             //双倍概率
             int level_add = bonus <= BONUS_RATE * 100 ? 2 : 1;
@@ -273,7 +267,7 @@ public class EsirUtil {
 
     // 判断当前摘星条件
     private static void modifyStarPicking(ListTag loreList, int nonChieftain, int newAmplifierLevel){
-        if(newAmplifierLevel < 10){
+        if(newAmplifierLevel < 20){
             boolean isMinimumGuarantee = true;
             for (int i = 0; i < loreList.size(); i++){
                 String c = loreList.getString(i);
